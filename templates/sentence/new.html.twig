@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Sentence{% endblock %}
+
+{% block body %}
+    <h1>Create new Sentence</h1>
+
+    {{ include('sentence/_form.html.twig') }}
+
+    <a href="{{ path('app_sentence_index') }}">back to list</a>
+{% endblock %}

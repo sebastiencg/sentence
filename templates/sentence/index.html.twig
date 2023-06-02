@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sentence index{% endblock %}
+
+{% block body %}
+    <h1>Sentence index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Sentence</th>
+                <th>CreatedAt</th>
+                <th>Author</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sentence in sentences %}
+            <tr>
+                <td>{{ sentence.id }}</td>
+                <td>{{ sentence.sentence }}</td>
+                <td>{{ sentence.createdAt ? sentence.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ sentence.author.email }}</td>
+                {% if sentence.author == app.user  %}
+                <td>
+                    <a href="{{ path('app_sentence_show', {'id': sentence.id}) }}">show</a>
+                    <a href="{{ path('app_sentence_edit', {'id': sentence.id}) }}">edit</a>
+                </td>
+                {% endif %}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_sentence_new') }}">Create new</a>
+{% endblock %}
